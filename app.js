@@ -45,6 +45,7 @@ function stopPainting(event) {
         const startY = startPoint[1];
         const deltaX = x - startX;
         const deltaY = y - startY;
+        const radius = Math.sqrt(deltaX ** 2 + deltaY ** 2);
         if (rectangle) {
             if (filling) {
                 ctx.fillRect(startX, startY, deltaX, deltaY);
@@ -52,7 +53,6 @@ function stopPainting(event) {
                 ctx.strokeRect(startX, startY, deltaX, deltaY);
             }
         } else if (circle) {
-            const radius = Math.sqrt(deltaX ** 2 + deltaY ** 2);
             ctx.beginPath();
             ctx.arc(startX, startY, radius, 0, Math.PI * 2);
             if (filling) {
@@ -65,12 +65,12 @@ function stopPainting(event) {
             ctx.moveTo(startX, startY);
             ctx.lineTo(x, y);
             ctx.stroke();
-        }
+        } 
         startPoint = [];
     }
 }
 
-function onMousemove(event) {
+function onPointermove(event) {
     const x = event.offsetX;
     const y = event.offsetY;
     if (!painting) {
@@ -145,10 +145,10 @@ function handleShapeClick() {
 }
 
 if (canvas) {
-    canvas.addEventListener("mousemove", onMousemove);
-    canvas.addEventListener("mousedown", startPainting);
-    canvas.addEventListener("mouseup", stopPainting);
-    canvas.addEventListener("mouseleave", stopPainting);
+    canvas.addEventListener("pointermove", onPointermove);
+    canvas.addEventListener("pointerdown", startPainting);
+    canvas.addEventListener("pointerup", stopPainting);
+    canvas.addEventListener("pointerleave", stopPainting);
     canvas.addEventListener("click", fillCanvas);
     canvas.addEventListener("contextmenu", handleRightClick);
 }
