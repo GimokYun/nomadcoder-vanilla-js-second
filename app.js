@@ -36,13 +36,6 @@ function startPainting(event) {
     }
 }
 
-function absolute(number) {
-    if (number < 0 ) {
-        return -number;
-    }
-    return number;
-}
-
 function stopPainting(event) {
     const x = event.offsetX;
     const y = event.offsetY;
@@ -50,8 +43,8 @@ function stopPainting(event) {
     if (startPoint.length !== 0) {
         const startX = startPoint[0];
         const startY = startPoint[1];
-        const deltaX = absolute(x - startX);
-        const deltaY = absolute(y - startY);
+        const deltaX = x - startX;
+        const deltaY = y - startY;
         if (rectangle) {
             if (filling) {
                 ctx.fillRect(startX, startY, deltaX, deltaY);
