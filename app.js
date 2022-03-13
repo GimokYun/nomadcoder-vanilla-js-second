@@ -26,7 +26,7 @@ let rectangle = false;
 let circle = false;
 let line = false;
 
-const startPoint = [];
+let startPoint = [];
 
 function startPainting(event) {
     painting = true;
@@ -66,7 +66,7 @@ function stopPainting(event) {
             ctx.lineTo(x, y);
             ctx.stroke();
         }
-        startPoint.splice(0, 2);
+        startPoint = [];
     }
 }
 
